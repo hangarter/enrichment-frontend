@@ -72,7 +72,7 @@ export default function Main() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6">Product Enrichment Dashboard</Typography>
+            <Typography variant="h6">Product Enrichment</Typography>
           </Toolbar>
         </AppBar>
         <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
