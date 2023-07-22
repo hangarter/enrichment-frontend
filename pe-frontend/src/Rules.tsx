@@ -13,44 +13,62 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon,
   IconButton,
   ListItemSecondaryAction,
+  Grid,
+  TextareaAutosize,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import RuleIcon from "@mui/icons-material/Rule";
 
 const clients = ["Client A", "Client B", "Client C"];
 const databases = ["Database 1", "Database 2", "Database 3"];
 
-let localValues = ["Local Value 1", "Local Value 2", "Local Value 3"];
-let globalValues = ["Global Value 1", "Global Value 2", "Global Value 3"];
-const rules = ["Rule 1", "Rule 2", "Rule 3"];
+let localCharacteristics = [
+  "Local Characteristic 1",
+  "Local Characteristic 2",
+  "Local Characteristic 3",
+];
+let globalCharacteristics = [
+  "Global Characteristic 1",
+  "Global Characteristic 2",
+  "Global Characteristic 3",
+];
+let rules = ["Rule 1", "Rule 2", "Rule 3"];
 
 export default function Rules() {
   const [client, setClient] = useState<string | null>(null);
   const [database, setDatabase] = useState<string | null>(null);
-  const [selectedGlobalValue, setSelectedGlobalValue] = useState<string | null>(
-    null
-  );
+  const [selectedGlobalCharacteristic, setSelectedGlobalCharacteristic] =
+    useState<string | null>(null);
+  const [showRules, setShowRules] = useState<boolean>(false);
 
-  const handleDeleteGlobalValue = (value: string) => {
-    globalValues = globalValues.filter((v) => v !== value);
-    if (selectedGlobalValue === value) {
-      setSelectedGlobalValue(null);
+  const handleDeleteGlobalCharacteristic = (value: string) => {
+    globalCharacteristics = globalCharacteristics.filter((v) => v !== value);
+    if (selectedGlobalCharacteristic === value) {
+      setSelectedGlobalCharacteristic(null);
     }
   };
 
-  const handleAddGlobalValue = () => {
-    globalValues = [...globalValues, `Global Value ${globalValues.length + 1}`];
+  const handleAddGlobalCharacteristic = () => {
+    globalCharacteristics = [
+      ...globalCharacteristics,
+      `Global Characteristic ${globalCharacteristics.length + 1}`,
+    ];
   };
 
   return (
     <Box sx={{ p: 2 }}>
       <Typography variant="h4">Rules</Typography>
       <Paper elevation={3} sx={{ my: 2, p: 2 }}>
-        <Typography variant="h6">Filters</Typography>
+        <Typography variant="h6">
+          <FilterListIcon sx={{ mr: 1 }} />
+          Filters
+        </Typography>
         <Box sx={{ my: 2 }}>
           <Autocomplete
             options={clients}
@@ -79,82 +97,85 @@ export default function Rules() {
           variant="contained"
           color="primary"
           disabled={!client || !database}
+          onClick={() => setShowRules(true)}
         >
           Visualize Rules
         </Button>
       </Paper>
-      {client && database ? (
+      {showRules && (
         <Paper elevation={3} sx={{ my: 2, p: 2 }}>
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6">Local Values</Typography>
+              <Typography variant="h6">
+                <ListAltIcon sx={{ mr: 1 }} />
+                Local Characteristics
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <List>
-                {localValues.map((value, index) => (
-                  <ListItem key={index}>
-                    <ListItemText primary={value} />
-                  </ListItem>
+              <Grid container spacing={2}>
+                {localCharacteristics.map((value, index) => (
+                  <Grid item xs={4} key={index}>
+                    <Typography>{value}</Typography>
+                  </Grid>
                 ))}
-              </List>
+              </Grid>
             </AccordionDetails>
           </Accordion>
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6">Global Values</Typography>
+              <Typography variant="h6">
+                <ListAltIcon sx={{ mr: 1 }} />
+                Global Characteristics
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <List>
-                {globalValues.map((value, index) => (
-                  <ListItem
-                    button
-                    key={index}
-                    onClick={() => setSelectedGlobalValue(value)}
-                  >
-                    <ListItemText primary={value} />
-                    <ListItemSecondaryAction>
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => handleDeleteGlobalValue(value)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+              <Grid container spacing={2}>
+                {globalCharacteristics.map((value, index) => (
+                  <Grid item xs={4} key={index}>
+                    <Button
+                      onClick={() => setSelectedGlobalCharacteristic(value)}
+                    >
+                      <Typography>{value}</Typography>
+                    </Button>
+
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleDeleteGlobalCharacteristic(value)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Grid>
                 ))}
-                <ListItem button onClick={handleAddGlobalValue}>
-                  <ListItemIcon>
+                <Grid item xs={4}>
+                  <IconButton onClick={handleAddGlobalCharacteristic}>
                     <AddIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Add new global value" />
-                </ListItem>
-              </List>
+                  </IconButton>
+                  <Typography>Add new global characteristic</Typography>
+                </Grid>
+              </Grid>
             </AccordionDetails>
           </Accordion>
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6">Rules</Typography>
+              <Typography variant="h6">
+                <RuleIcon sx={{ mr: 1 }} />
+                Rules
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {selectedGlobalValue ? (
-                <List>
-                  {rules.map((rule, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={rule} />
-                    </ListItem>
-                  ))}
-                </List>
+              {selectedGlobalCharacteristic ? (
+                <TextareaAutosize
+                  minRows={3}
+                  placeholder="Enter rules here"
+                  style={{ width: "100%" }}
+                />
               ) : (
-                <Typography>Select a global value</Typography>
+                <Typography>Select a global characteristic</Typography>
               )}
             </AccordionDetails>
           </Accordion>
         </Paper>
-      ) : (
-        <Typography>
-          Select client and database to visualize their rules.
-        </Typography>
       )}
     </Box>
   );
