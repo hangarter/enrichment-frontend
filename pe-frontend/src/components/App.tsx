@@ -11,8 +11,10 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import ButtonBase from "@mui/material/ButtonBase";
+
 import RuleManagement from "./RuleManagement";
 import FilterManagement from "./FilterManagement";
 import EnrichmentManagement from "./EnrichmentManagement";
@@ -55,16 +57,42 @@ function App() {
         </AppBar>
         <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
           <List>
-            {[
-              "Rule Management",
-              "Filter Management",
-              "Enrichment Management",
-              "Feedback & Logs",
-            ].map((text) => (
-              <ListItem button key={text} onClick={toggleDrawer(false)}>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem>
+              <ButtonBase
+                component={Link}
+                to="/rule-management"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText primary="Rule Management" />
+              </ButtonBase>
+            </ListItem>
+            <ListItem>
+              <ButtonBase
+                component={Link}
+                to="/filter-management"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText primary="Filter Management" />
+              </ButtonBase>
+            </ListItem>
+            <ListItem>
+              <ButtonBase
+                component={Link}
+                to="/enrichment-management"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText primary="Enrichment Management" />
+              </ButtonBase>
+            </ListItem>
+            <ListItem>
+              <ButtonBase
+                component={Link}
+                to="/feedback-logs"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText primary="Feedback & Logs" />
+              </ButtonBase>
+            </ListItem>
           </List>
         </Drawer>
         <Container style={{ padding: "20px", marginTop: "20px" }}>
