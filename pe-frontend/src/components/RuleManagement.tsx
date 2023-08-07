@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 const mockRules = [
   { id: 1, name: "Rule 1" },
@@ -76,6 +77,7 @@ function RuleManagement() {
         <List>
           {rules.map((rule) => (
             <ListItem key={rule.id}>
+              <ListAltIcon style={{ marginRight: "10px" }} />
               {editingRuleId === rule.id ? (
                 <>
                   <TextField
