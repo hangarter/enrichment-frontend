@@ -19,6 +19,12 @@ import RuleManagement from "./RuleManagement";
 import FilterManagement from "./FilterManagement";
 import EnrichmentManagement from "./EnrichmentManagement";
 import FeedbackLogs from "./FeedbackLogs";
+
+import GavelIcon from "@mui/icons-material/Gavel";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import TuneIcon from "@mui/icons-material/Tune";
+import FeedbackIcon from "@mui/icons-material/Feedback";
+
 const theme = createTheme();
 
 function App() {
@@ -63,6 +69,7 @@ function App() {
                 to="/rule-management"
                 onClick={toggleDrawer(false)}
               >
+                <GavelIcon style={{ marginRight: "10px" }} />
                 <ListItemText primary="Rule Management" />
               </ButtonBase>
             </ListItem>
@@ -72,6 +79,7 @@ function App() {
                 to="/filter-management"
                 onClick={toggleDrawer(false)}
               >
+                <FilterListIcon style={{ marginRight: "10px" }} />
                 <ListItemText primary="Filter Management" />
               </ButtonBase>
             </ListItem>
@@ -81,6 +89,7 @@ function App() {
                 to="/enrichment-management"
                 onClick={toggleDrawer(false)}
               >
+                <TuneIcon style={{ marginRight: "10px" }} />
                 <ListItemText primary="Enrichment Management" />
               </ButtonBase>
             </ListItem>
@@ -90,11 +99,13 @@ function App() {
                 to="/feedback-logs"
                 onClick={toggleDrawer(false)}
               >
+                <FeedbackIcon style={{ marginRight: "10px" }} />
                 <ListItemText primary="Feedback & Logs" />
               </ButtonBase>
             </ListItem>
           </List>
         </Drawer>
+
         <Container style={{ padding: "20px", marginTop: "20px" }}>
           <Paper elevation={3} style={{ padding: "20px" }}>
             <Routes>
