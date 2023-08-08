@@ -37,15 +37,17 @@ const BlocklyEditor: React.FC = () => {
     ],
   };
 
-  let workspace: Blockly.Workspace;
+  let workspace: Blockly.Workspace | null = null;
 
   useEffect(() => {
-    workspace = Blockly.inject("blocklyDiv", {
-      toolbox: toolbox,
-    });
+    if (workspace === null) {
+      workspace = Blockly.inject("blocklyDiv", {
+        toolbox: toolbox,
+      });
+    }
   }, []);
 
-  return <div id="blocklyDiv" style={{ height: "480px", width: "600px" }} />;
+  return <div id="blocklyDiv" style={{ height: "480px", width: "100%" }} />;
 };
 
 export default BlocklyEditor;
