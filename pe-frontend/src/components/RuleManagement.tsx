@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import BlocklyEditor from "./BlocklyEditor";
 
 const mockRules = [
   { id: 1, name: "Rule 1" },
@@ -107,7 +108,7 @@ function RuleManagement() {
       {/* Right Column: Blockly Workspace */}
       <Grid item xs={12} md={8}>
         <div style={{ border: "1px solid #ccc", minHeight: "400px" }}>
-          Blockly Workspace
+          <BlocklyEditor />
         </div>
       </Grid>
     </Grid>

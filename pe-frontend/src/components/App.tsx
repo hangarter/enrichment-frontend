@@ -24,6 +24,7 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import TuneIcon from "@mui/icons-material/Tune";
 import FeedbackIcon from "@mui/icons-material/Feedback";
+import BlocklyEditor from "./BlocklyEditor";
 
 const theme = createTheme();
 
@@ -76,6 +77,16 @@ function App() {
             <ListItem>
               <ButtonBase
                 component={Link}
+                to="/blockly-editor"
+                onClick={toggleDrawer(false)}
+              >
+                <GavelIcon style={{ marginRight: "10px" }} />
+                <ListItemText primary="Blockly" />
+              </ButtonBase>
+            </ListItem>
+            <ListItem>
+              <ButtonBase
+                component={Link}
                 to="/filter-management"
                 onClick={toggleDrawer(false)}
               >
@@ -111,6 +122,7 @@ function App() {
             <Routes>
               <Route path="/" element={<RuleManagement />} />
               <Route path="/rule-management" element={<RuleManagement />} />
+              <Route path="/blockly-editor" element={<BlocklyEditor />} />
               <Route path="/filter-management" element={<FilterManagement />} />
               <Route
                 path="/enrichment-management"
